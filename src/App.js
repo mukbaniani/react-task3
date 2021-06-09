@@ -7,6 +7,7 @@ import PostProviderComponent from './provider/PostProvider';
 const SingIn = React.lazy(() => import('./components/forms/sing-in'));
 const SingUp = React.lazy(() => import('./components/forms/sing-up'));
 const Home = React.lazy(() => import('./pages/home'));
+const PicturesPage = React.lazy(() => import('./pages/picture-page'));
 
 function App() {
   return (
@@ -21,6 +22,10 @@ function App() {
 
             <Route path="/register">
               <SingUp />
+            </Route>
+
+            <Route path="/pictures">
+              <PicturesPage />
             </Route>
 
             <Route path="/">

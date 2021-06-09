@@ -20,8 +20,15 @@ function Navigation() {
       ) : null}
       {!authed ? (
         <li className="nav-item">
-          <NavLink to="register" className="nav-link">
+          <NavLink to="/register" className="nav-link">
             რეგისტრაცია
+          </NavLink>
+        </li>
+      ) : null}
+      {authed ? (
+        <li className="nav-item">
+          <NavLink to="/pictures" className="nav-link">
+            სურათები
           </NavLink>
         </li>
       ) : null}
