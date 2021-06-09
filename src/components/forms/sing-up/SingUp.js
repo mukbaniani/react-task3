@@ -1,3 +1,5 @@
+import { WithAuthProtecred } from '../../../hoc/with-auth-protected/withAuthProtected';
+
 function SingUp() {
   return (
     <div className="container mt-4">
@@ -44,4 +46,4 @@ function SingUp() {
   );
 }
 
-export default SingUp;
+export default WithAuthProtecred(SingUp);

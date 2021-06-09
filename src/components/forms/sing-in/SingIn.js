@@ -1,7 +1,24 @@
+import { useForm } from 'react-hook-form';
+import { login } from '../../../services/auth';
+import { useHistory } from 'react-router';
+import { WithAuthProtecred } from '../../../hoc/with-auth-protected/withAuthProtected';
+import { useDispatch } from 'react-redux';
+import { setAuthUserAction } from '../../../redux/actions/AuthAction';
+
 function SingIn() {
+  const { register, handleSubmit } = useForm();
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const onSubmit = async (data) => {
+    const loggedin = await login(data);
+    localStorage.setItem('auth.token', JSON.stringify(loggedin.token));
+    dispatch(setAuthUserAction(loggedin.token));
+    history.replace('/');
+  };
   return (
     <div className="container mt-4">
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
             Email address
@@ -11,6 +28,8 @@ function SingIn() {
             className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
+            defaultValue="eve.holt@reqres.in"
+            {...register('email', { required: true })}
           />
           <div id="emailHelp" className="form-text">
             We'll never share your email with anyone else.
@@ -24,6 +43,8 @@ function SingIn() {
             type="password"
             className="form-control"
             id="exampleInputPassword1"
+            defaultValue="cityslicka"
+            {...register('password', { required: true })}
           />
         </div>
         <div className="mb-3 form-check">
@@ -44,4 +65,4 @@ function SingIn() {
   );
 }
 
-export default SingIn;
+export default WithAuthProtecred(SingIn);
