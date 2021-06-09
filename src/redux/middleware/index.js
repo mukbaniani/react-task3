@@ -1,2 +1,2 @@
-import LoggerMiddleware from './LoggerMiddleware';
-export default LoggerMiddleware;
+export * from './LoggerMiddleware';
+export * from './autoLoginMiddleware';

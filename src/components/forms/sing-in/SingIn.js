@@ -4,6 +4,8 @@ import { useHistory } from 'react-router';
 import { WithAuthProtecred } from '../../../hoc/with-auth-protected/withAuthProtected';
 import { useDispatch } from 'react-redux';
 import { setAuthUserAction } from '../../../redux/actions/AuthAction';
+import { HOME_PATH } from '../../../utils/routePaths';
+import { AUTH_TOKEN } from '../../../utils/constants';
 
 function SingIn() {
   const { register, handleSubmit } = useForm();
@@ -12,9 +14,9 @@ function SingIn() {
 
   const onSubmit = async (data) => {
     const loggedin = await login(data);
-    localStorage.setItem('auth.token', JSON.stringify(loggedin.token));
+    localStorage.setItem(AUTH_TOKEN, JSON.stringify(loggedin.token));
     dispatch(setAuthUserAction(loggedin.token));
-    history.replace('/');
+    history.replace(HOME_PATH);
   };
   return (
     <div className="container mt-4">
